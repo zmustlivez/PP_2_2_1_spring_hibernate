@@ -27,7 +27,7 @@ public class MainApp {
       user5.setCar(new Car("BMW", 555));
       userService.add(user5);
 
-      getUsersWCars(context);
+      getUsersWCars(userService);
       context.close();
    }
 
@@ -49,11 +49,9 @@ public class MainApp {
       }
    }
 
-   private static void getUsersWCars(AnnotationConfigApplicationContext context) {
-      TypedQuery<Car> query = context.getBean(SessionFactory.class).openSession().createQuery("from Car");
-      List<Car> resultList = query.getResultList();
-      context.close();
-      for (Car car : resultList) {
+   private static void getUsersWCars(UserService userService) {
+      List<Car> cars = userService.listUsersWCars();
+      for (Car car : cars) {
          System.out.println("Id = " + car.getUser().getId());
          System.out.println("First Name = " + car.getUser().getFirstName());
          System.out.println("Last Name = " + car.getUser().getLastName());
