@@ -1,13 +1,12 @@
 package hiber.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "car")
-
 public class Car implements Serializable {
 
     public Car() {
@@ -50,5 +49,18 @@ public class Car implements Serializable {
 
     public void setSeries(int series) {
         this.series = series;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Car car = (Car) o;
+        return series == car.series && Objects.equals(user, car.user) && Objects.equals(model, car.model);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(user, model, series);
     }
 }
