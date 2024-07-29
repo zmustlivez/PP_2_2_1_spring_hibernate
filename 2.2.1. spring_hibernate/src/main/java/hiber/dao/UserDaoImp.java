@@ -31,7 +31,7 @@ public class UserDaoImp implements UserDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Car> listUsersWCars() {
+    public List<Car> listUsersWithCars() {
         return sessionFactory.getCurrentSession().createQuery("from Car").getResultList();
     }
 }

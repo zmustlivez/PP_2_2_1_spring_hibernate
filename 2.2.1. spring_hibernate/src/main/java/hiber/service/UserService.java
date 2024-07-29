@@ -11,5 +11,5 @@ public interface UserService {
 
     List<User> listUsers();
 
-    List<Car> listUsersWCars();
+    List<Car> listUsersWithCars();
 }

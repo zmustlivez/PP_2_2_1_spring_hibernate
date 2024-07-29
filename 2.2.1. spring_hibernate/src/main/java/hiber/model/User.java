@@ -5,6 +5,8 @@ import org.hibernate.annotations.Cascade;
 import javax.persistence.*;
 import java.util.Objects;
 
+import static org.hibernate.annotations.CascadeType.*;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -22,8 +24,9 @@ public class User {
    @Column(name = "email")
    private String email;
 
-   @OneToOne(mappedBy = "user")
-   @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+   @OneToOne
+   @JoinColumn(name = "car_id")//, referencedColumnName = "id")
+   @Cascade({DETACH, MERGE, PERSIST, REFRESH,LOCK,REPLICATE,SAVE_UPDATE})
    private Car car;
 
 
@@ -48,29 +51,16 @@ public class User {
       return firstName;
    }
 
-   public void setFirstName(String firstName) {
-      this.firstName = firstName;
-   }
-
    public String getLastName() {
       return lastName;
-   }
-
-   public void setLastName(String lastName) {
-      this.lastName = lastName;
    }
 
    public String getEmail() {
       return email;
    }
 
-   public void setEmail(String email) {
-      this.email = email;
-   }
-
    public void setCar(Car car) {
       this.car = car;
-      car.setUser(this);
    }
 
    @Override

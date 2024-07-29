@@ -10,13 +10,16 @@ import java.util.Objects;
 public class Car implements Serializable {
 
     @Id
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String model;
 
     private int series;
+
+    @OneToOne(mappedBy = "car")
+
+    private User user;
 
     public Car() {
     }
@@ -26,6 +29,7 @@ public class Car implements Serializable {
         this.model = model;
         this.series = series;
     }
+
     public User getUser() {
         return user;
     }
