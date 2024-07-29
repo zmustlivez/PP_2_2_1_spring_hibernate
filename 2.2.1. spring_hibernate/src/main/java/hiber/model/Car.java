@@ -9,15 +9,6 @@ import java.util.Objects;
 @Table(name = "car")
 public class Car implements Serializable {
 
-    public Car() {
-    }
-
-    public Car(String model, int series) {
-
-        this.model = model;
-        this.series = series;
-    }
-
     @Id
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -27,6 +18,14 @@ public class Car implements Serializable {
 
     private int series;
 
+    public Car() {
+    }
+
+    public Car(String model, int series) {
+
+        this.model = model;
+        this.series = series;
+    }
     public User getUser() {
         return user;
     }
